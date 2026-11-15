@@ -4,6 +4,10 @@
 
 Gedacht für Installationen mit vielen Shellys: Suche, Gruppierung nach Stockwerken und Räumen, Status auf einen Blick und **gestaffelte Firmware-Updates** mit Testgruppe.
 
+![HomeShelly – Ansicht nach Stockwerken](docs/screenshot.png)
+
+*Ansicht „Stockwerk“ mit Beispieldaten. In Home Assistant erscheinen statt der einfachen Zeichen die üblichen Material-Design-Symbole.*
+
 ## Funktionen
 
 - **Suchfeld** über Name, Raum, Stockwerk, Modell, IP und Firmware; Treffer werden markiert, passende Gruppen klappen auf.
