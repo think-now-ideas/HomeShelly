@@ -1,0 +1,11 @@
+# Beispiel: HomeShelly-Karte in einer Panel-Ansicht
+# Wohin: Dashboard → Bearbeiten → Karte hinzufügen → „Manuell“ (Code-Editor)
+type: custom:shelly-overview-card
+title: Shellys
+test_label: shelly_test   # Label für die Testgruppe (bekommt Updates zuerst)
+test_days: 3              # so viele Tage soll die Testgruppe stabil laufen
+temp_warn: 70             # °C, ab wann ein Hinweis kommt
+rssi_weak: -75            # dBm, darunter gilt das WLAN als schwach
+pause_seconds: 20         # Pause zwischen zwei Updates
+update_timeout: 600       # Sekunden, die pro Update höchstens gewartet wird
+restart_hours: 24         # Neustarts in diesem Zeitraum werden gemeldet

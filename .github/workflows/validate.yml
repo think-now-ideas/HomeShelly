@@ -1,0 +1,32 @@
+# Prüft bei jedem Push: HACS-Validierung, JavaScript-Syntax und Versionstest.
+name: Prüfen
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  hacs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: hacs/action@main
+        with:
+          category: plugin
+          ignore: brands
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: JavaScript-Syntax prüfen
+        run: node --check dist/shelly-overview-card.js
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Tests
+        run: |
+          pip install pytest
+          pytest -q

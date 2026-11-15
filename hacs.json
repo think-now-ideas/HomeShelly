@@ -1,0 +1,6 @@
+{
+  "name": "HomeShelly",
+  "filename": "shelly-overview-card.js",
+  "homeassistant": "2026.5.0",
+  "render_readme": true
+}
