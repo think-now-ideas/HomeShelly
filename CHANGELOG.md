@@ -1,5 +1,9 @@
 # Änderungen
 
+## 1.1.1
+
+- Korrektur: Geräte, deren Entitäten nur „unbekannt“ sind (z. B. Eingänge eines Shelly i3, die seit dem Start nicht ausgelöst wurden), wurden fälschlich als offline mit „aus“ angezeigt. Offline gilt jetzt nur noch, wenn Home Assistant alle Entitäten des Geräts als „nicht verfügbar“ meldet.
+
 ## 1.1.0
 - Räume lassen sich wie Stockwerke auf- und zuklappen
 - Knopf „Alles auf-/zuklappen“

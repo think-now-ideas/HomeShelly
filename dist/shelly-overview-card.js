@@ -5,7 +5,7 @@
  *
  * Installation: siehe Anleitung. Karte:  type: custom:shelly-overview-card
  */
-const SOC_VERSION = "1.1.0";
+const SOC_VERSION = "1.1.1";
 
 const SOC_DEFAULTS = {
   title: "Shellys",
@@ -137,6 +137,7 @@ class ShellyOverviewCard extends HTMLElement {
       const cat = e.entity_category || null;
       const id = e.entity_id;
 
+      r.states.push(st.state); // alle Entitäten zählen für „offline“
       if (domain === "update") {
         if (!/beta/.test(id) && !/beta/.test(tk)) r.upd = id;
         continue;
@@ -153,8 +154,6 @@ class ShellyOverviewCard extends HTMLElement {
       } else if ((domain === "switch" || domain === "light") && !cat && !e.hidden) {
         r.ctrls.push(id);
       }
-      if (!cat) r.states.push(st.state);
-      else if (domain !== "update") r.states.push(st.state);
     }
 
     const out = [];
@@ -189,8 +188,9 @@ class ShellyOverviewCard extends HTMLElement {
       let restart = null;
       if (r.uptime) { const t = Date.parse(h.states[r.uptime].state); if (Number.isFinite(t)) restart = t; }
 
-      const unavailable = (s) => s === "unavailable" || s === "unknown";
-      const offline = r.states.length > 0 && r.states.every(unavailable) || (us && us.state === "unavailable" && r.ctrls.every((c) => unavailable(h.states[c].state)) && r.ctrls.length > 0);
+      // Offline nur, wenn HA ALLE Entitäten als „unavailable“ meldet. „unknown“ ist normal
+      // (Ereignis noch nicht ausgelöst, Taste nie gedrückt) und heißt nicht offline.
+      const offline = r.states.length > 0 && r.states.every((s) => s === "unavailable");
 
       const hints = [];
       if (!offline) {
